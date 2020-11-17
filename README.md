@@ -57,5 +57,7 @@ Much better
 See question 2
 ### Why didn't you package everything into one SWF?
 See question 2
+### Why are there all the useless `trace`s all over your code?
+I added those during development and I can't be bothered to remove them. See question 2
 ### Why is this titled FAQ despite the fact that no one has asked you any questions?
 In this case FAQ stands for "Fully Anticipated Questions"
