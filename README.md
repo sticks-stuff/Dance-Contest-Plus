@@ -35,6 +35,8 @@ I tried that and it had significant performance issues.
 There's no automatic conversion for that so I'd have to do it manually. See question 2
 ### Some colours/animation/text positions are messed up compared to the original Dance Contest?
 The decompiled FLA I had access to came with these issues and fixing them manually would take quite a long time (see question 2). If you have a correctly decompiled FLA of Dance Contest I would be more than happy to use it however. 
+### You don't actually need to put all of getid3 in your repo
+See question 2
 ### I encountered a crash/bug!
 That's not a question
 ### I encountered a crash/bug?
