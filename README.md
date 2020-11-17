@@ -55,3 +55,7 @@ That's not a question
 Much better
 ### Why is your code so shit?
 See question 2
+### Why didn't you package everything into one SWF?
+See question 2
+### Why is this titled FAQ despite the fact that no one has asked you any questions?
+In this case FAQ stands for "Fully Anticipated Questions"
