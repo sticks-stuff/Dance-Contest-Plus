@@ -31,9 +31,9 @@ If you're a CPPS owner and you don't want to use my herokuapp setup then you are
 ## FAQ
 ### Why doesn't my song work?
 The website I am using to grab raw OSZ files from osu! only seems to track songs with leaderboards and a few select others. Supposedly you can grab raw downloads using the osu! API but I tried tinkering around with that a few times and couldn't seem to get anywhere with it.
-### Why are you using an external website to download osu! songs
+### Why are you using an external website to download osu! songs?
 I am lazy
-### Why are you using an external website to convert osu! songs (https://dance-contest-plus.herokuapp.com) 
+### Why are you using an external website to convert osu! songs (https://dance-contest-plus.herokuapp.com)?
 I wanted people to be able to use this without setting up a local webserver. PHP requires a local webserver to run at all and I thought this made it more accessible. If you *really* want everything to be local you are free to clone the repo, put `retrieve_osu!_from_url.php`,`convert_osu!_to_DC.php` and `cleanup.php` somewhere on your webserver and edit and recompile the FLA to point to `localhost` (this is left as an exercise for the reader).
 ### Why are you downloading the songs at all? Can't you just read them remotely?
 Maybe, but definitely not with AS2
