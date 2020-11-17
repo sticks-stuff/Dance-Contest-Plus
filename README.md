@@ -3,6 +3,16 @@ A mod to increase the functionality of Dance Contest
 
 Grab the latest release from the releases section on the right and you should just be able to run the SWF using your flash player or your web browser.
 
+| IF YOU CONTINUALLY GET "Oops! That didn't work!" FOLLOW THE INSTRUCTIONS BELOW |
+| ---
+| ![Right click > Global Settings...](https://media.discordapp.net/attachments/526586940535865405/778066613890056212/unknown.png) |
+| ![Advanced](https://media.discordapp.net/attachments/526586940535865405/778066656412565525/unknown.png) |
+| ![Trusted Location Settings...](https://media.discordapp.net/attachments/526586940535865405/778066681264209941/unknown.png) |
+| ![Add...](https://media.discordapp.net/attachments/526586940535865405/778066703850274826/unknown.png) |
+| ![Add File...](https://media.discordapp.net/attachments/526586940535865405/778066729933996053/unknown.png) |
+| ![Choose the SWF you downloaded](https://media.discordapp.net/attachments/526586940535865405/778066777250725928/unknown.png)  |
+| Then restart the SWF |
+
 If you want to use this on [CPSC](https://github.com/Thestickman391/CPSC), extract to \play\v2\games\dancing.
 
 If you're a CPPS owner and you don't want to use my herokuapp setup then you are free to clone the repo, put `retrieve_osu!_from_url.php`,`convert_osu!_to_DC.php` and `cleanup.php` somewhere on your webserver and edit and recompile the FLA to point to your webserver instead (this is left as an exercise for the reader). **It is recommended you setup a cron job to clear /tmp/ every so often as songs will only be cleared if the user exits dance contest through pressing the quit button** (this is left as an exercise for the reader).
@@ -45,3 +55,7 @@ That's not a question
 Much better
 ### Why is your code so shit?
 See question 2
+### Why didn't you package everything into one SWF?
+See question 2
+### Why is this titled FAQ despite the fact that no one has asked you any questions?
+In this case FAQ stands for "Fully Anticipated Questions"
