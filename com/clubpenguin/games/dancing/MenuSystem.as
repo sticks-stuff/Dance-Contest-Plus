@@ -615,24 +615,39 @@ class com.clubpenguin.games.dancing.MenuSystem
 					   _global.notes = result_lv.notes.split(',');
 					   _global.noteTimes = result_lv.noteTimes.split(',');
 					   _global.noteLengths = result_lv.noteLengths.split(',');
-					   _global.AudioFilename = result_lv.AudioFilename;
+					   var AudioFilename2 = result_lv.AudioFilename;
 					   _global.playtime_seconds = result_lv.playtime_seconds;
 					   trace(_global.AudioFilename);
 					   trace("playtime_seconds " + _global.playtime_seconds);
-					   // trace(result_lv.notes.split(','));
-					   // trace(result_lv.noteTimes.split(','));
-					   // trace(result_lv.noteLengths.split(','));
-					   // com.clubpenguin.games.dancing.GameEngine.startSongCustom(notes, noteTimes, noteLengths);
-					   
-					   //this.loadMenu(com.clubpenguin.games.dancing.MenuSystem.MENU_SINGLEPLAYER_PREGAME);
-					   _global.movie.host.gotoAndStop("exit");
-					   this.hideSpeechBubble();
-					   _global.movie.speech._visible = false;
-					   _global.movie.options._visible = false;
-					   _global.movie.loading._visible = false;
-					   _global.movie.howtoplay._visible = false;
-						_global.movie.howtoplay.gotoAndStop(1);
-					   break;
+					   _global.AudioFilename = new Sound();
+					   _global.AudioFilename.onLoad = function () {  
+							if (!success) {
+								trace("Error connecting to server.");
+								_global.movie.loading._visible = false;
+								_global.movie.host.animation.movie.gotoAndPlay("talkStart");
+							    _global.movie.speech.message.text = "Oops! That didn't work!\nTry exiting and re-entering Dance Contest and try again.";
+								for (var i = 1; i <= 5; ++i)
+								{
+									if (_global.movie.speech.message.textHeight < (i * 24) + 12)
+									{
+										_global.movie.speech.bubble._height = 80 + (i * 12);
+									} // end if
+								} // end of for
+								_global.fileName = "FAILED!!!";
+								break;					   
+						   
+						   } else {
+							   _global.movie.host.gotoAndStop("exit");
+							   this.hideSpeechBubble();
+							   _global.movie.speech._visible = false;
+							   _global.movie.options._visible = false;
+							   _global.movie.loading._visible = false;
+							   _global.movie.howtoplay._visible = false;
+								_global.movie.howtoplay.gotoAndStop(1);
+							   break;
+						   }
+						}
+						_global.AudioFilename.loadSound("https://dance-contest-plus.herokuapp.com/tmp/" + _global.fileName.substr(0, _global.fileName.length-4) + "/" + AudioFilename2, false);
 					}
 					send_lv.sendAndLoad('https://dance-contest-plus.herokuapp.com/convert_osu!_to_DC.php?fileName=' + _global.fileName + '&chart=' + _global.charts[($buttonID - 1)], result_lv, 'POST');
 					trace('https://dance-contest-plus.herokuapp.com/convert_osu!_to_DC.php?fileName=' + _global.fileName + '&chart=' + _global.charts[($buttonID - 1)]);
@@ -643,112 +658,112 @@ class com.clubpenguin.games.dancing.MenuSystem
 					_global.movie.howtoplay.gotoAndStop(1);
 					break;
 				} else {
-                _global.dls_dance._seenInstructions = false;
-                switch ($buttonID)
-                {
-                    case 1:
-                    {
-                        trace("url submitted " + _global.movie.options.urlInput.urlInputText.text);
-                        var urlSubmitted = _global.movie.options.urlInput.urlInputText.text;
-						var send_dl:LoadVars = new LoadVars();
-						var result_dl:LoadVars = new LoadVars();
-						var charts = new Array();
-						result_dl.onLoad = function(success:Boolean):Void {
-							if (!success) {
-								trace("Error connecting to server.");
-								_global.movie.loading._visible = false;
-								_global.movie.host.animation.movie.gotoAndPlay("talkStart");
-							    _global.movie.speech.message.text = "Oops! That didn't work!\nUnfortunately maps that don't have a leaderboard cannot be used at this time.";
-								for (var i = 1; i <= 5; ++i)
-								{
-									if (_global.movie.speech.message.textHeight < (i * 24) + 12)
+					_global.dls_dance._seenInstructions = false;
+					switch ($buttonID)
+					{
+						case 1:
+						{
+							trace("url submitted " + _global.movie.options.urlInput.urlInputText.text);
+							var urlSubmitted = _global.movie.options.urlInput.urlInputText.text;
+							var send_dl:LoadVars = new LoadVars();
+							var result_dl:LoadVars = new LoadVars();
+							var charts = new Array();
+							result_dl.onLoad = function(success:Boolean):Void {
+								if (!success) {
+									trace("Error connecting to server.");
+									_global.movie.loading._visible = false;
+									_global.movie.host.animation.movie.gotoAndPlay("talkStart");
+									_global.movie.speech.message.text = "Oops! That didn't work!\nUnfortunately maps that don't have a leaderboard cannot be used at this time.";
+									for (var i = 1; i <= 5; ++i)
 									{
-										_global.movie.speech.bubble._height = 80 + (i * 12);
-									} // end if
-								} // end of for
-								_global.fileName = "FAILED!!!";
-								break;
-							} else {
-							   trace(result_dl.charts.split('.osu'));
-							   charts = result_dl.charts.split('.osu');
-							   for(i=(charts.length); i>=0; i--)
-							   {
-									if (charts[i] == "")
-									charts.splice(i,1);
-							   }
-							   _global.charts = charts;
-							   trace(result_dl.fileName);
-							   fileName = result_dl.fileName;
-							   _global.fileName = result_dl.fileName;
-							   var beatmapID = urlSubmitted.split('https://osu.ppy.sh/beatmapsets/')[1];
-							   var beatmapID = beatmapID.split('#')[0];
-							   var rawFileName = fileName.split(beatmapID + " ")[1];
-							   currentMenu = 692;
-							   _global.hasDownloaded = true;
-							   trace(hasDownloaded);
-							   _global.movie.host.animation.movie.gotoAndPlay("talkStart");
-							   trace("current menu is " + currentMenu);
-							   _global.movie.loading._visible = false;
-							   _global.movie.speech.message.text = "Successfully downloaded " + rawFileName.split(".osz")[0] + "!\nPlease pick a beatmap";
-								for (var i = 1; i <= 5; ++i)
-								{
-									if (_global.movie.speech.message.textHeight < (i * 24) + 12)
+										if (_global.movie.speech.message.textHeight < (i * 24) + 12)
+										{
+											_global.movie.speech.bubble._height = 80 + (i * 12);
+										} // end if
+									} // end of for
+									_global.fileName = "FAILED!!!";
+									break;
+								} else {
+								   trace(result_dl.charts.split('.osu'));
+								   charts = result_dl.charts.split('.osu');
+								   for(i=(charts.length); i>=0; i--)
+								   {
+										if (charts[i] == "")
+										charts.splice(i,1);
+								   }
+								   _global.charts = charts;
+								   trace(result_dl.fileName);
+								   fileName = result_dl.fileName;
+								   _global.fileName = result_dl.fileName;
+								   var beatmapID = urlSubmitted.split('https://osu.ppy.sh/beatmapsets/')[1];
+								   var beatmapID = beatmapID.split('#')[0];
+								   var rawFileName = fileName.split(beatmapID + " ")[1];
+								   currentMenu = 692;
+								   _global.hasDownloaded = true;
+								   trace(hasDownloaded);
+								   _global.movie.host.animation.movie.gotoAndPlay("talkStart");
+								   trace("current menu is " + currentMenu);
+								   _global.movie.loading._visible = false;
+								   _global.movie.speech.message.text = "Successfully downloaded " + rawFileName.split(".osz")[0] + "!\nPlease pick a beatmap";
+									for (var i = 1; i <= 5; ++i)
 									{
-										_global.movie.speech.bubble._height = 80 + (i * 12);
-									} // end if
-								} // end of for
-								var _loc6 = 3.500000E+000;
-								trace("charts lenghts = " + charts.length);
-								_global.movie.options.background._height = charts.length * 27 + (charts.length - 1) * _loc6 + 14;
-								_global.movie.options.background._y = (-30.5 * (charts.length)) + 122;
-								var _loc2 = 0;
-								while (_loc2++ < 9)
-								{
-									var pointer = "item" + String(_loc2);
-									trace(pointer);
-									_global.movie.options[pointer]._visible = false;
-								} // end while
-								for (var _loc2 = 0; _loc2 < charts.length; ++_loc2)
-								{
-									var pointer = "item" + String(_loc2 + 1);
-									_global.movie.options[pointer].label.text = charts[_loc2];
-									trace(pointer);
-									_global.movie.options[pointer]._visible = true;
-									_global.movie.options[pointer]._y = (_loc2 - 1) * 30.5 - (((charts.length - 5) * 30.5) - 7);
-								} // end of for
-								_global.movie.options._visible = true;
-								_global.movie.options.urlInput._visible = false;
-								_global.movie.howtoplay._visible = false;
-								_global.movie.howtoplay.gotoAndStop(1);
-								talking = false;
-								break;
+										if (_global.movie.speech.message.textHeight < (i * 24) + 12)
+										{
+											_global.movie.speech.bubble._height = 80 + (i * 12);
+										} // end if
+									} // end of for
+									var _loc6 = 3.500000E+000;
+									trace("charts lenghts = " + charts.length);
+									_global.movie.options.background._height = charts.length * 27 + (charts.length - 1) * _loc6 + 14;
+									_global.movie.options.background._y = (-30.5 * (charts.length)) + 122;
+									var _loc2 = 0;
+									while (_loc2++ < 9)
+									{
+										var pointer = "item" + String(_loc2);
+										trace(pointer);
+										_global.movie.options[pointer]._visible = false;
+									} // end while
+									for (var _loc2 = 0; _loc2 < charts.length; ++_loc2)
+									{
+										var pointer = "item" + String(_loc2 + 1);
+										_global.movie.options[pointer].label.text = charts[_loc2];
+										trace(pointer);
+										_global.movie.options[pointer]._visible = true;
+										_global.movie.options[pointer]._y = (_loc2 - 1) * 30.5 - (((charts.length - 5) * 30.5) - 7);
+									} // end of for
+									_global.movie.options._visible = true;
+									_global.movie.options.urlInput._visible = false;
+									_global.movie.howtoplay._visible = false;
+									_global.movie.howtoplay.gotoAndStop(1);
+									talking = false;
+									break;
+								}
 							}
-						}
-						var download_url = "https://bloodcat.com/osu/s/" + urlSubmitted.split('https://osu.ppy.sh/beatmapsets/')[1]; //supposidly you can use the osu! api to grab DL links to but i could never figure it out, so hopefully this site never goes down lol
-						download_url = download_url.split("#").join("%23"); //putting a # anywhere in a url fails for whatever reason lol
-						trace(download_url);
-						_global.movie.loading._visible = true;
-						_global.movie.host.animation.movie.gotoAndPlay("talkStart");
-						this.showSpeechBubble("Downloading beatmap...\nPlease wait...");
-						this.hideMenuOptions();
-						try {
-							send_dl.sendAndLoad('https://dance-contest-plus.herokuapp.com/retrieve_osu!_from_url.php?download_url=' + download_url, result_dl, 'POST');
-						} catch ( e ){
-							trace(e);
-						}
-						break;
-                    } 
-                    case 2:
-                    {
-                        this.loadMenu(com.clubpenguin.games.dancing.MenuSystem.MENU_WELCOME_OPTIONS);
-                        return;
-                    } 
-                    default:
-                    {
-                        return;
-                    } 
-                } // End of switch
-                break;
+							var download_url = "https://bloodcat.com/osu/s/" + urlSubmitted.split('https://osu.ppy.sh/beatmapsets/')[1]; //supposidly you can use the osu! api to grab DL links to but i could never figure it out, so hopefully this site never goes down lol
+							download_url = download_url.split("#").join("%23"); //putting a # anywhere in a url fails for whatever reason lol
+							trace(download_url);
+							_global.movie.loading._visible = true;
+							_global.movie.host.animation.movie.gotoAndPlay("talkStart");
+							this.showSpeechBubble("Downloading beatmap...\nPlease wait...");
+							this.hideMenuOptions();
+							try {
+								send_dl.sendAndLoad('https://dance-contest-plus.herokuapp.com/retrieve_osu!_from_url.php?download_url=' + download_url, result_dl, 'POST');
+							} catch ( e ){
+								trace(e);
+							}
+							break;
+						} 
+						case 2:
+						{
+							this.loadMenu(com.clubpenguin.games.dancing.MenuSystem.MENU_WELCOME_OPTIONS);
+							return;
+						} 
+						default:
+						{
+							return;
+						} 
+					} // End of switch
+					break;
 				}
             } 
             case com.clubpenguin.games.dancing.MenuSystem.MENU_SINGLEPLAYER_INTRO:

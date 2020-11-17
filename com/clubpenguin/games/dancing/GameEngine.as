@@ -265,8 +265,7 @@
             SHELL = _global.getCurrentShell();
         } // end if
         com.clubpenguin.games.dancing.GameEngine.SHELL.stopMusic();
-        sound = new Sound();
-		sound.loadSound("https://dance-contest-plus.herokuapp.com/tmp/" + _global.fileName.substr(0, _global.fileName.length-4) + "/" + _global.AudioFilename, true);
+		_global.AudioFilename.start();
         this.handleScoreUpdate(Number.MAX_VALUE);
         isPlayingGame = true;
         isDancing = true;
