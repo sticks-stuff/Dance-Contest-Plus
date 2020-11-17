@@ -11,7 +11,7 @@
         parentMovie = parentMovieClip;
         noteType = int(type);
         noteTime = time;
-        noteDuration = duration;
+        noteDuration = parseFloat(duration);
         sentToServer = false;
         autoReleased = false;
         var _loc3 = parentMovie[com.clubpenguin.games.dancing.Note.START_MOVIECLIP]._y - parentMovie[com.clubpenguin.games.dancing.Note.TARGET_MOVIECLIP]._y;
