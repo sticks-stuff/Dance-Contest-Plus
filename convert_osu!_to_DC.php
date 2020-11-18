@@ -93,7 +93,7 @@
 		}
 	}
 	function handle_third_number($num) {
-		write_to_line(1, strval($num + $AudioLeadIn));
+		write_to_line(1, strval($num + intval($AudioLeadIn)));
 	}
 	function handle_fourth_and_fifth_number($third_num,$fourth_num,$sixth_num) {
 		if (($fourth_num == 128)) {
