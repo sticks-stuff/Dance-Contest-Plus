@@ -1,15 +1,15 @@
 <?php
 	include("getid3/getid3.php");
-	// $fileName = '1196084 Usada Pekora - Discommunication Alien.osz';
+	// $fileName = '404318 Waterflame - Electroman Adventures.osz';
 	$fileName = $_GET["fileName"];
-	// $chart = 'Usada Pekora - Discommunication Alien (LLENN-) [Easy]';
+	// $chart = 'Waterflame - Electroman Adventures (rinaldi28) [EZ]';
 	$chart = $_GET["chart"];
 	echo $fileName;
 	echo $chart;
 	$file = "./tmp/" . $fileName;
 	$zip = new ZipArchive;
 	$res = $zip->open($file);
-	$AudioLeadIn = 0;
+	$audioLeadIn = 0;
 	if ($res === TRUE) {
 		$result = file('zip://' . realpath($file) . '#' . $chart . '.osu'); 
 		$result_GC = file_get_contents('zip://' . realpath($file) . '#' . $chart . '.osu'); 
@@ -34,7 +34,7 @@
 				}
 				if(trim($tempExplodeVar[0]) == 'AudioLeadIn')
 				{
-					$AudioLeadIn = trim(end($tempExplodeVar));
+					$audioLeadIn = trim(end($tempExplodeVar));
 				}
 			}
 		}
@@ -48,7 +48,7 @@
 
 		$numLists = interpret_numbers_list($noteData);
 		// print_r($numLists[0][0]);
-		handle_number_lists($numLists);
+		handle_number_lists($numLists, $audioLeadIn);
 		// print_r($GLOBALS[0]);
 		$outputdata = format_output_lines();
 		// file_put_contents('output.txt', print_r($outputdata, true));
@@ -92,8 +92,8 @@
 				break;
 		}
 	}
-	function handle_third_number($num) {
-		write_to_line(1, strval($num + intval($AudioLeadIn)));
+	function handle_third_number($num, $audioLeadIn) {
+		write_to_line(1, strval($num + intval($audioLeadIn)));
 	}
 	function handle_fourth_and_fifth_number($third_num,$fourth_num,$sixth_num) {
 		if (($fourth_num == 128)) {
@@ -104,10 +104,10 @@
 		}
 	}
 
-	function handle_number_lists($numLists) {
+	function handle_number_lists($numLists, $audioLeadIn) {
 		foreach($numLists as $numList) {
 			handle_first_number($numList[0]);
-			handle_third_number($numList[2]);
+			handle_third_number($numList[2], $audioLeadIn);
 			handle_fourth_and_fifth_number($numList[2], $numList[3], $numList[5]);
 		}
 	}

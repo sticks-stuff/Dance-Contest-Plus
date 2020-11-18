@@ -265,7 +265,8 @@
             SHELL = _global.getCurrentShell();
         } // end if
         com.clubpenguin.games.dancing.GameEngine.SHELL.stopMusic();
-		_global.AudioFilename.start();
+		//_global.AudioFilename.start();
+		var timer = setInterval(function () {_global.AudioFilename.start(); clearInterval(timer)}, _global.AudioLeadIn);
         this.handleScoreUpdate(Number.MAX_VALUE);
         isPlayingGame = true;
         isDancing = true;

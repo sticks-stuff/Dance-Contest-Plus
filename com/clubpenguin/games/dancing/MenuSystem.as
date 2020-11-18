@@ -617,7 +617,13 @@ class com.clubpenguin.games.dancing.MenuSystem
 					   _global.noteLengths = result_lv.noteLengths.split(',');
 					   var AudioFilename2 = result_lv.AudioFilename;
 					   _global.playtime_seconds = result_lv.playtime_seconds;
+					   _global.AudioLeadIn = 0;
+					   if (result_lv.AudioLeadIn != null)
+					   {
+							_global.AudioLeadIn = result_lv.AudioLeadIn;
+					   }
 					   trace(_global.AudioFilename);
+					   trace(_global.AudioLeadIn);
 					   trace("playtime_seconds " + _global.playtime_seconds);
 					   _global.AudioFilename = new Sound();
 					   _global.AudioFilename.onLoad = function () {  
