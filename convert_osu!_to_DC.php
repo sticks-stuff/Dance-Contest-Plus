@@ -12,7 +12,7 @@
 	if ($res === TRUE) {
 		$result = file('zip://' . realpath($file) . '#' . $chart . '.osu'); 
 		$result_GC = file_get_contents('zip://' . realpath($file) . '#' . $chart . '.osu'); 
-		$search  = array('AudioFilename', 'Title', 'Artist', 'Creator', 'Mode');
+		$search  = array('AudioFilename', 'AudioLeadIn', 'Title', 'Artist', 'Creator', 'Mode');
 		foreach($result as $line)
 		{
 			if(strposa($line, $search) !== false){
