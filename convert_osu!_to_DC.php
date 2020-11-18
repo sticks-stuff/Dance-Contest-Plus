@@ -9,6 +9,7 @@
 	$file = "./tmp/" . $fileName;
 	$zip = new ZipArchive;
 	$res = $zip->open($file);
+	$AudioLeadIn = 0;
 	if ($res === TRUE) {
 		$result = file('zip://' . realpath($file) . '#' . $chart . '.osu'); 
 		$result_GC = file_get_contents('zip://' . realpath($file) . '#' . $chart . '.osu'); 
@@ -30,6 +31,10 @@
 					   $playtime_seconds = $fileAnalyze['playtime_seconds'];
 					   echo '&' . "playtime_seconds=" .$playtime_seconds;
 					   
+				}
+				if(trim($tempExplodeVar[0]) == 'AudioLeadIn')
+				{
+					$AudioLeadIn = trim(end($tempExplodeVar));
 				}
 			}
 		}
@@ -88,7 +93,7 @@
 		}
 	}
 	function handle_third_number($num) {
-		write_to_line(1, strval($num));
+		write_to_line(1, strval($num + $AudioLeadIn));
 	}
 	function handle_fourth_and_fifth_number($third_num,$fourth_num,$sixth_num) {
 		if (($fourth_num == 128)) {
