@@ -1,8 +1,8 @@
 <?php
 	include("getid3/getid3.php");
-	//$fileName = '244796%20SMiLE.dk%20-%20BUTTERFLY%20%28UPSWING%20MIX%29.osz';
+	// $fileName = '1196084 Usada Pekora - Discommunication Alien.osz';
 	$fileName = $_GET["fileName"];
-	//$chart = 'SMiLE.dk - BUTTERFLY (UPSWING MIX) (Marirose) [Light]';
+	// $chart = 'Usada Pekora - Discommunication Alien (LLENN-) [Easy]';
 	$chart = $_GET["chart"];
 	echo $fileName;
 	echo $chart;
@@ -35,9 +35,9 @@
 		}
 		
 		$tempArray = explode('[HitObjects]', $result_GC);
-		$str = explode('_', $tempArray[1]);
-		$finalArray = explode('\n', $str[0]);
-		
+		//print_r($tempArray);		
+		//$str = explode('_', $tempArray[1]);
+		$finalArray = explode('\n', $tempArray[1]);
 		$noteData = trim($finalArray[0]);
 		$separator = "\r\n";
 
