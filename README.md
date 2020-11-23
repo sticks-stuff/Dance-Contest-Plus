@@ -1,7 +1,7 @@
 # Dance Contest+
 A mod to increase the functionality of Dance Contest
 
-Grab the latest release from the releases section on the right and you should just be able to run the SWF using your flash player or your web browser.
+Grab the latest release from the releases section on the right and you should just be able to run the SWF using your flash player or your web browser. Alternatively you can go to https://dance-contest-plus.herokuapp.com and you should just be able to play it right there an then, albeit with a slow load time.
 
 | IF YOU CONTINUALLY GET "Oops! That didn't work!" FOLLOW THE INSTRUCTIONS BELOW |
 | ---
