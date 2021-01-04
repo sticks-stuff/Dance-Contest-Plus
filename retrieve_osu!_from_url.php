@@ -2,7 +2,7 @@
 	
 	//$download_url = "https://bloodcat.com/osu/s/244796"; 
 	$download_url = $_GET["download_url"];
-	if(substr($download_url,0,27) != "https://bloodcat.com/osu/s/")
+	if(substr($download_url,0,25) != "https://beatconnect.io/b/")
 	{
 		echo "Not an osu! url!";
 	} else {

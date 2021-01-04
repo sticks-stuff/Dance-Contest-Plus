@@ -745,8 +745,8 @@ class com.clubpenguin.games.dancing.MenuSystem
 									break;
 								}
 							}
-							var download_url = "https://bloodcat.com/osu/s/" + urlSubmitted.split('https://osu.ppy.sh/beatmapsets/')[1]; //supposidly you can use the osu! api to grab DL links to but i could never figure it out, so hopefully this site never goes down lol
-							download_url = download_url.split("#").join("%23"); //putting a # anywhere in a url fails for whatever reason lol
+							var download_url = "https://beatconnect.io/b/" + urlSubmitted.split('https://osu.ppy.sh/beatmapsets/')[1]; //supposidly you can use the osu! api to grab DL links to but i could never figure it out, so hopefully this site never goes down lol
+							download_url = download_url.split("#")[0]; //putting a # anywhere in a url fails for whatever reason lol
 							trace(download_url);
 							_global.movie.loading._visible = true;
 							_global.movie.host.animation.movie.gotoAndPlay("talkStart");
